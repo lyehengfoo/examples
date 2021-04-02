@@ -2,332 +2,189 @@
   <head>
     <style>
       
-/* --- Colors --- */
-@color-background: #C5CAE9;
-@color-art: #08263e;
-@color-art-second: #27313d;
-@color-font: #333;
-@color-pink: #f47ece;
-@color-orange: #f7863e;
-@color-blue: #47eff2;
-/* --- Gradient --- */
-@gradient-art: linear-gradient(to bottom, @color-art, @color-art-second, @color-art-second);
-@gradient-round: linear-gradient(to bottom, @color-pink, @color-pink, @color-orange, @color-orange);
-@gradient-round-darken: linear-gradient(to bottom, darken(@color-pink, 5%), darken(@color-pink, 5%), darken(@color-orange, 5%), darken(@color-orange, 5%));
-@gradient-shadow: linear-gradient(to bottom, @color-art, @color-art, transparent);
-@gradient-shadow-circle: radial-gradient(50% bottom, ellipse cover, red, @color-art 70%);
-/* --- Fonts --- */
-@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,600&display=swap");
 
-/* ----------------------------------------------- */
-/* ----------------------------------------------- */
+:root {
+  --hero-gap: 60px;
+}
 
-html, body {
-  font-family: 'Lato', sans-serif;
-  color: @color-font;
-  background-color: @color-background;
-  margin: 0;
-  padding: 0;
-  width: 100vw;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lora", serif;
+}
+
+h1 {
+  font-size: calc(0.5rem + 8vmin);
+  font-weight: 600;
+  font-style: italic;
+}
+
+h2 {
+  font-size: calc(0.8rem + 4vmin);
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.2;
+}
+
+p {
+  font-size: calc(0.8rem + 1.25vmin);
+  line-height: 1.65;
+}
+
+.caption {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  color: white;
+  z-index: 2;
+  font-size: 0.6rem;
+}
+
+.parallax-wrapper {
   height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  perspective: 10px;
+}
+
+.parallax-content {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--hero-gap));
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-}
 
-.wrapper {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  @media screen and (max-height: 800px)  {
-    transform: translate(-50%, -50%) scale(0.8);
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110%;
+    object-fit: cover;
+    z-index: 1;
+    transform: translateZ(1px);
   }
-}
 
-.noise {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%; height: 100%;
-  z-index: 10;
-  background-image: url(data:image/png;base64,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);
-}
+  .hero__title {
+    color: white;
+    z-index: 2;
+    text-align: center;
+    transform: translateZ(-2px) scale(1.2);
 
-.art {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 664px; height: 886px;
-  background: @gradient-art;
-  overflow: hidden;
-}
-
-.texts {
-  z-index: 50;
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 664px; height: 886px;
-}
-
-span {
-  position: absolute;
-  font-family: "Sawarabi Gothic";
-  color: #f5f5f5;
-  font-size: 12px;
-  letter-spacing: 2px;
-  &#text_1 {
-    z-index: 10;
-    top: 35px; left: 30px;
-  }
-  &#text_2 {
-    z-index: 10;
-    font-size: 10px;
-    text-transform: uppercase;
-    top: 50px; left: 32px;
-  }
-  &#text_3 {
-    z-index: 10;
-    font-family: 'Lato', sans-serif;
-    font-size: 24px;
-    top: 35px; right: 30px;
-    font-weight: 500;
-  }
-  &#text_4 {
-    z-index: 10;
-    text-transform: uppercase;
-    top: 50%; left: -20px;
-    transform: rotate(90deg) translateY(-50%);
-  }
-  &#text_5 {
-    z-index: 10;
-    text-transform: uppercase;
-    top: 50%; right: -20px;
-    transform: rotate(90deg) translateY(-50%);
-  }
-  &#text_6 {
-    z-index: 10;
-    text-transform: uppercase;
-    left: 50%; bottom: 30px;
-    transform: translateX(-50%);
-  }
-}
-
-.door {
-  position: absolute; left: 50%;
-  transform: translatex(-50%);
-  width: 312px; height: 47px;
-  &#door_1 {
-    z-index: 15;
-    top: 86px;
-    background-color: #fff6fb;
-    &::after {
-      content: "";
-      position: absolute;
-      right: -84px; top: 0;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 47px 86px 0 0;
-      border-color: #fff6fb transparent transparent transparent;
+    p {
+      margin-top: 0.5rem;
+      font-size: calc(0.6rem + 0.75vmin);
     }
-    &::before {
-      content: "";
-      position: absolute;
-      left: -85px; top: 0;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 0 86px 47px 0;
-border-color: transparent #fff6fb transparent transparent;
+
+    a {
+      color: white;
     }
   }
-  &#door_2 {
-    bottom: 86px;
-    background-color: #0f172b;
-    &::after {
-      content: "";
-      position: absolute;
-      right: -84px; top: 0;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 47px 0 0 86px;
-      border-color: transparent transparent transparent darken(#0f172b, 5%);
-    }
-    &::before {
-      content: "";
-      position: absolute;
-      left: -85px; top: 0;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 0 0 47px 86px;
-      border-color: transparent transparent darken(#0f172b, 5%) transparent;
 
-    }
-  }
-}
-
-.door-shadow {
-  position: absolute; 
-  left: 50%; top: 90px;
-  transform: translatex(-50%);
-  width: 402px; height: 20px;
-  border-radius: 50%;
-  box-shadow:
-        0 0 80px 50px #fff,  /* inner white */
-        0 0 140px 60px @color-blue, /* middle magenta */
-0 0 160px 90px fade(@color-blue, 80%); /* outer cyan */
   &::after {
     content: "";
     position: absolute;
-    left: 50%; bottom: -120px;
-    transform: translatex(-50%);
-    width: 4000px; height: 240px;
-    background: radial-gradient(at bottom, transparent 5%, darken(@color-art, 5%));
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 100%;
+    transform: translateZ(8px);
+    pointer-events: none;
+    background-image: linear-gradient(
+      to bottom,
+      hsla(0, 0%, 0%, 0) 0%,
+      hsla(0, 0%, 0%, 0.013) 8%,
+      hsla(0, 0%, 0%, 0.049) 14.8%,
+      hsla(0, 0%, 0%, 0.104) 20.8%,
+      hsla(0, 0%, 0%, 0.175) 26%,
+      hsla(0, 0%, 0%, 0.259) 30.8%,
+      hsla(0, 0%, 0%, 0.352) 35.3%,
+      hsla(0, 0%, 0%, 0.45) 39.8%,
+      hsla(0, 0%, 0%, 0.55) 44.5%,
+      hsla(0, 0%, 0%, 0.648) 49.5%,
+      hsla(0, 0%, 0%, 0.741) 55.2%,
+      hsla(0, 0%, 0%, 0.825) 61.7%,
+      hsla(0, 0%, 0%, 0.896) 69.2%,
+      hsla(0, 0%, 0%, 0.951) 77.9%,
+      hsla(0, 0%, 0%, 0.987) 88.1%,
+      hsl(0, 0%, 0%) 100%
+    );
+    z-index: 3;
   }
 }
 
-.door-shadow-2 {
-  position: absolute; 
-  left: 50%; top: 130px;
-  transform: translatex(-50%);
-  width: 320px; height: 1px;
-  border-radius: 50%;
-  box-shadow:
-        0 0 40px 40px #fff,  /* inner white */
-        0 0 70px 30px @color-blue, /* middle magenta */
-0 0 80px 40px fade(@color-blue, 80%); /* outer cyan */
-}
+.main-content {
+  position: relative;
+  margin: 0 auto;
+  padding: var(--hero-gap) 2rem;
+  max-width: 725px;
+  background-color: white;
 
-.gradient-1 {
-  position: absolute; 
-  top: 50%; right: -40px;
-  transform: translateY(-50%) rotate(5deg);
-  width: 2px; height: 500px;
-  border-radius: 50%;
-  box-shadow:
-        0 0 80px 50px lighten(#642754, 15%),  /* inner white */
-        0 0 140px 60px lighten(#642754, 5%), /* middle magenta */
-0 0 160px 90px fade(#642754, 80%); /* outer cyan */
-}
-
-.gradient-2 {
-  position: absolute; 
-  bottom: -50px; left: -80px;
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  box-shadow:
-        0 0 80px 50px lighten(#154a44, 15%),  /* inner white */
-        0 0 140px 60px lighten(#154a44, 5%), /* middle magenta */
-0 0 160px 90px fade(#154a44, 80%); /* outer cyan */
-}
-
-img {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 200;
-  filter: brightness(1);
-}
-
-.round {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 420px; height: 420px;
-  border-radius: 50%;
-  background: @gradient-round;
-  box-shadow: 0 7px 14px rgba(0,0,0,0.10), 0 10px 10px rgba(211,18,150,0.22);
-  .textbox {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 1200px; height: 420px;
-    span#text_6 {
-      position: absolute;
-      top: 60px; left: 50%;
-      transform: translateX(-50%);
-    }
-    h1#text_7 {
-      z-index: 10;
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      height: 420px;
-      line-height: 420px;
-      margin: 0;
-      font-size: 239px;
-      font-weight: bold;
-      font-family: "Sawarabi Gothic";
-    }
-    h1#text_8 {
-      z-index: 9;
-      /* --- Shadow Text --- */
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      height: 420px;
-      line-height: 420px;
-      margin: 0;
-      font-size: 240px;
-      font-weight: bold;
-      font-family: "Sawarabi Gothic";
-      text-shadow: 0 7px 14px rgba(0,0,0,0.10), 0 10px 10px rgba(211,18,150,0.22);
-    }
+  > * + * {
+    margin-top: 2rem;
   }
 }
 
-/* --- Clip Text --- */
-.clip-text {
+.scroll-icon-container {
+  --size: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-  color: transparent;
-  background-clip: text;
-  background-image: @gradient-round-darken;
+  overflow: hidden;
+  top: calc(var(--size) * -1);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: calc(var(--size) * 2);
+  height: calc(var(--size) * 2);
+  border-radius: 0.15rem;
+  background-color: inherit;
+  box-shadow: 0 6px 12px -3px rgba(black, 0.1);
+  z-index: 4;
+
+  .icon--down-arrow {
+    width: var(--size);
+    height: var(--size);
+  }
 }
-
-
 
     </style>
   </head>
-<body id="wrapper">
-  <div class="wrapper">
-    <div class="art" id="layer-1">
-      <div class="noise"></div>
-      <div class="texts" id="layer-2"><span id="text_1">一生懸命働く  </span><span id="text_2">@Craaftx1</span><span id="text_3">216</span><span id="text_4">かもしれない</span><span id="text_5">ポスターを毎日作る</span><span id="text_6">マジディエルロペス © 2017</span></div>
-      <div class="door" id="door_1"></div>
-      <div class="door-shadow"></div>
-      <div class="door-shadow-2"></div>
-      <div class="door" id="door_2"></div>
-      <div class="gradient-1"></div>
-      <div class="gradient-2"></div>
-      <div class="round" id="layer-3">
-        <div class="textbox"><span id="text_6">儿ーピング</span>
-          <h1 class="clip-text" id="text_7" data-text="作業">作業</h1>
-          <h1 class="clip-text" id="text_8">作業</h1>
-        </div>
-      </div><img class="man" src="https://cdn.discordapp.com/attachments/215765926392496128/518043029630615552/fallingman.png" id="layer-4"/>
+<body>
+
+<div class="parallax-wrapper">
+  <div class="hero parallax-content"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/225363/sterling-davis-4iXagiKXn3Y-unsplash-min.jpg" alt="Photo of city during a sunset by Sterling Davis"/>
+    <div class="hero__title">
+      <h1>CSS Parallax Hero</h1>
+      <p>Photo by Sterling Davis on <a href="https://unsplash.com/photos/4iXagiKXn3Y" target="_blank">Unsplash</a></p>
     </div>
-  </div> 
-  
-    <script>
-      window.onload = function(){
-	var wrapper = document.querySelector('#wrapper'),
-			layerOne = document.querySelector('#layer-1'),
-			layerTwo = document.querySelector('#layer-2'),
-			layerThree = document.querySelector('#layer-3'),
-			layerFour = document.querySelector('#layer-4');
-
-	wrapper.addEventListener('mousemove',function(e){
-		var pageX = e.clientX - window.innerWidth/2,
-                pageY = e.clientY - window.innerHeight/2;
-  	layerOne.style.transform = 'translateX(-' + (50 + pageX/200) + '%) translateY(-' + (50 + pageY/200) + '%)';
-  	layerTwo.style.transform = 'translateX(-' + (50 + pageX/1000) + '%) translateY(-' + (50 + pageY/1000) +  '%)';
-  	layerThree.style.transform = 'translateX(-' + (50 + pageX/200) + '%) translateY(-' + (50 + pageY/200) +  '%)';
-  	layerFour.style.transform = 'translateX(-' + (50 + pageX/25) + '%) translateY(-' + (50 + pageY/25) + '%)';
-	});
-}
-    </script>
-
+  </div>
+  <div class="main-content">
+    <div class="scroll-icon-container">
+      <svg class="icon--down-arrow" viewBox="0 0 24 24">
+        <path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path>
+      </svg>
+    </div>
+    <h2>No one's called him Baby Buster since high school.</h2>
+    <p>So you take your mom to work every day? Bummer. Moms are such a pain in the ass, huh? It's, like, die already! Pound is tic-tac-toe, right? Heyyyy Uncle Father Oscar. I run a pretty tight ship around here. With a pool table. It's a gaming ship. They're not gonna strip, right? I told them not to, but I can't guarantee their instincts won't kick in. One for the ladies.</p>
+    <p>Did you enjoy your lunch, mom? You drank it fast enough. The worst that could happen is that I could spill coffee all over this $3,000 suit. COME ON. Get rid of the Seaward. Lucille: I'll leave when I'm good and ready.</p>
+    <p>Hey, it was one night of wild passion! And yet you didn't notice her body? I like to look in the mirror. GENE!! [screams] Come on, this is a Bluth family celebration. It's no place for children. Yeah, that's a cultural problem is what it is. You know, your average American male is in a perpetual state of adolescence, you know, arrested development. (Hey. That's the name of the show!) Did you know that more frozen bananas are sold right here on this boardwalk than anywhere in the OC? One of the guys told me to take my head out of my BOTTOM and get back to work…my BOTTOM! That's how Tony Wonder lost a nut.</p>
+    <p>Oh, like when they say "poofter" to mean "tourist", yes. I need a fake passport, preferably to France… I like the way they think. Tobias Fünke costume. I know what an erection feels like, Michael. You were just a turd out there, you know? You couldn't kick, and you couldn't run, you know? You were just a turd. I'm not a prostitute. Michael: Then I shall let you live! Second-of-ly, I know you're the big marriage expert. Oh I'm sorry, I forgot, your wife is dead.</p>
+    <p>Each year, Oscar attempts the four hundred mile walk from Newport Beach to Berkeley, California. In the twelve years that he's attempted this, he's never made it farther than UC Irvine. ♪♪ Big yellow joint, big yellow joint, I'll meet you down at the big yellow joint. ♪♪ Someone order 140 pounds of upper body strength? Chickens don't clap!</p>
+  </div>
+</div>
 </body>
   
 </html>
