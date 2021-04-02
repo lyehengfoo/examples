@@ -1,23 +1,23 @@
 Example from: https://freefrontend.com/css-parallax/
 
 Author
-Guilmain Dorian
-November 30, 2018
+Ryan Mulligan
+April 10, 2020
 
 Links
 demo and code
-(https://codepen.io/Craaftx/pen/yQGpwa)
-
+(https://codepen.io/hexagoncircle/pen/OJyPygv)
 
 Made with
-HTML (Pug) / CSS (Less) / JavaScript
+HTML (Pug) / CSS (SCSS)
 
-About the code
-PARALLAX EFFECT
-Optimised for Google Chrome, some problems appear on Mozilla with background-clip: text;
+About a code
+CSS PARALLAX HERO
+Parallax effect created with CSS transforms and perspective properties.
 
-Compatible browsers:Chrome, Edge, Firefox (partial), Opera, Safari
+Compatible browsers:Chrome, Edge, Firefox, Opera, Safari
 
-Responsive:no
+Responsive:yes
 
 Dependencies:-
+
