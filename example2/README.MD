@@ -4,7 +4,7 @@ Author
 Ryan Mulligan
 December 2, 2020
 Links
-demo and code
+demo and code (https://codepen.io/hexagoncircle/pen/JjRYaZw)
 Made with
 HTML (Pug) / CSS
 About a code
